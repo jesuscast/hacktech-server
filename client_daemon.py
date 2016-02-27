@@ -4,8 +4,9 @@ import requests
 import time
 import json
 import os
+import uuid
 
-unique_id = 'thisismyniqueid'
+unique_id = str(uuid.uuid1())
 domain = 'http://localhost:8080'
 path_to_watch = os.getcwd()+'/watch_folder'
 
