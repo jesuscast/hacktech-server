@@ -90,7 +90,11 @@ def add_file_received():
 	# So the only thing that I actually is the result of whether it was correct or not.
 	#upload.save(os.getcwd()+'/base_identities/'+user_unique_id+ext)
 
-
+@route('/castaneda/store_information', method = 'POST')
+def add_account():
+	print request.forms.get('username')
+	print request.forms.get('password')
+	print request.forms.get('from')
 
 if __name__ == '__main__':
 	run(host='0.0.0.0', port=8080)

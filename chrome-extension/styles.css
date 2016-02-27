@@ -1,0 +1,15 @@
+#biopass_element {
+	width: 40px;
+    float: right;
+    background-color: #EA8B54;
+    border-radius: 5px;
+    padding: 1px;
+    margin: 1px;
+}
+
+#biopass_element label {
+	position: relative;
+	left: -3px;
+	top: -2px;
+	color: #333;
+}

@@ -1,0 +1,28 @@
+{
+	"manifest_version": 2,
+	"name":"BioPass",
+	"version": "1.0",
+	"description":"BioPass",
+	"short_name":"BioPass provides a platform websites can use for logging into websites using your fingerprint.",
+	"author": "Jesus Castaneda <jesus.cast.sosa@gmail.com>",
+	"content_scripts":[
+		{
+			"matches":["http://www.netflix.com/*"],
+			"css":["styles.css"],
+			"js":["jquery.js","files_listener.js","website_listener.js"],
+			"run_at":"document_end"
+		}
+	],
+	"permissions":[
+		"tabs",
+		"activeTab",
+		{"fileSystem": ["write", "retainEntries", "directory"]},
+		"http://www.netflix.com/browse"
+	],
+	"background": {
+		"persistent":false,
+		"scripts":["website_listener.js"]
+	},
+	"page_action": {
+	}
+}
