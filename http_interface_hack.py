@@ -50,8 +50,10 @@ def is_it_legit(file1_path, file2_path):
 	# extensions_two = ['xyt','brw','dm','hcm', 'lcm','lfm','min','qm']
 	for extension in extensions_one:
 		os.remove(file1_path.replace('bmp', '')+extension)
+	print result
 	result = int(result.replace(' ',''))
-	return result > 2
+	print 'result: '+str(result)
+	return result > 40
 
 @route('/castaneda/check_identity',  method='POST')
 def add_file_received():
@@ -60,7 +62,7 @@ def add_file_received():
 	unique_id = request.forms.get('unique_id')
 	unique_id_tmp = unique_id+'.bmp'
 	name, ext = os.path.splitext(upload.filename)
-	if ext != '.bmp' and user_unique_id != '':
+	if ext != '.bmp' and unique_id != '':
 		return 'File extension not allowed.'
 	# Check if it is not in the base identities, otherwise it would effectively be there.
 	all_identities = os.listdir(os.getcwd()+'/base_identities')
@@ -95,13 +97,3 @@ if __name__ == '__main__':
 	# Run bottle in application mode. Required in order to get the application working with uWSGI!
 else:
 	app = application = bottle.default_app()
-
-"""
-./mogrify -format jpg -type grayscale identify_2016-02-27_02-08-31_00.bmp
-
-./mindtct /home/jesus/jesos/learning/hackteck/images/jason/identify_2016-02-27_02-08-31_00.jpg final
-
-
-
-./mindtct /home/jesus/jesos/learning/hackteck/images/jason/identify_2016-02-27_02-05-27_00.jpg final_3
-"""
