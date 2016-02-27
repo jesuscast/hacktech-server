@@ -16,7 +16,7 @@ dateStr = lambda(x): datetime.date.fromtimestamp(int(x)).strftime('%Y-%m')
 testing = False
 
 
-@route('/')
+@route('/castaneda')
 def index():
 	return 'your welcome.'
 
