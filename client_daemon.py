@@ -18,7 +18,7 @@ def send_file_to_server(filename):
 	save_credentials_r = requests.post(url = domain+'/castaneda/check_identity', data = data, files = files)
 
 
-send_file_to_server('base_identities/sad.bmp')
+send_file_to_server('data/image.bmp')
 # So actually I am a fucking genious, because what I do I just have a fucking while True loop
 # that everytime the filesystem changes I send the image to the server with a timestamp.
 # then the server has to take care of deleting it if it is not used within 2 minutes.

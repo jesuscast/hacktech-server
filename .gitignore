@@ -2,3 +2,5 @@ env/*
 *.pyc
 *.log
 *.swp
+temp_files/*
+base_identities/*

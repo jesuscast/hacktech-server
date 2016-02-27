@@ -5,6 +5,7 @@ from collections import OrderedDict
 from fingerprint_matching import FingerprintImage
 import bottle
 import datetime
+import subprocess
 import hashlib
 import time
 import sys
@@ -38,7 +39,19 @@ def is_it_legit(file1_path, file2_path):
 	"""
 	print 'file1_path: '+file1_path
 	print 'file2_path: '+file2_path
-	return True
+	# Make the image into a grayscale and jpg format.
+	subprocess.call('mogrify -format jpg -type grayscale '+file1_path, shell=True)
+	subprocess.call('./mindtct '+file1_path.replace('bmp', 'jpg')+' '+file1_path.replace('.bmp', ''), shell=True)
+	subprocess.call('convert -rotate 90 '+file1_path.replace('bmp', 'jpg')+' '+file1_path.replace('bmp', 'jpg'), shell=True)
+	#
+	#
+	result = subprocess.check_output('./bozorth3 '+file1_path.replace('bmp', '')+'xyt'+' '+file2_path.replace('bmp', '')+'xyt', shell=True)
+	extensions_one = ['xyt','bmp','brw','dm','hcm', 'lcm','lfm','min','qm']
+	# extensions_two = ['xyt','brw','dm','hcm', 'lcm','lfm','min','qm']
+	for extension in extensions_one:
+		os.remove(file1_path.replace('bmp', '')+extension)
+	result = int(result.replace(' ',''))
+	return result > 2
 
 @route('/castaneda/check_identity',  method='POST')
 def add_file_received():
@@ -54,19 +67,18 @@ def add_file_received():
 	print 'all_identities: '
 	print all_identities
 	if unique_id_tmp not in all_identities:
-		upload.save(os.getcwd()+'/base_identities/'+unique_id_tmp)
-		tmp_holder = FingerprintImage(os.getcwd()+'/base_identities/'+unique_id_tmp)
-		tmp_holder.rotate()
+		a = os.getcwd()+'/base_identities/'+unique_id_tmp
+		upload.save(a)
+		subprocess.call('mogrify -format jpg -type grayscale '+a, shell=True)
+		os.remove(a)
+		a = a.replace('bmp','jpg')
+		subprocess.call('convert -rotate 90 '+a+' '+a, shell=True)
+		subprocess.call('./mindtct '+a+' '+a.replace('.jpg', ''), shell=True)
 		print 'A new identity was saved.'
 	new_file_name= id_generator()+unique_id+'.bmp'
 	new_file_path = os.getcwd()+'/temp_files/'+new_file_name
 	upload.save(new_file_path)
-	# rotation
-	tmp_holder = FingerprintImage(new_file_path)
-	tmp_holder.rotate()
-	# end rotation
 	legit = is_it_legit(new_file_path, os.getcwd()+'/base_identities/'+unique_id_tmp)
-	os.remove(new_file_path)
 	if unique_id not in all_files_received:
 		all_files_received[unique_id] = []
 	print 'unique_id: '+unique_id
@@ -85,7 +97,7 @@ else:
 	app = application = bottle.default_app()
 
 """
-mogrify -format jpg -type grayscale identify_2016-02-27_02-08-31_00.bmp
+./mogrify -format jpg -type grayscale identify_2016-02-27_02-08-31_00.bmp
 
 ./mindtct /home/jesus/jesos/learning/hackteck/images/jason/identify_2016-02-27_02-08-31_00.jpg final
 
