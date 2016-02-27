@@ -6,6 +6,7 @@ from fingerprint_matching import FingerprintImage
 import bottle
 import datetime
 import subprocess
+import json
 import hashlib
 import time
 import sys
@@ -92,9 +93,10 @@ def add_file_received():
 
 @route('/castaneda/store_information', method = 'POST')
 def add_account():
-	print request.forms.get('username')
-	print request.forms.get('password')
-	print request.forms.get('from')
+	a = { 'username': request.forms.get('username'), 'password':request.forms.get('password'), 'from': request.forms.get('from')}
+	f = open('what.json','w')
+	f.write(json.dumps(a))
+	f.close()
 
 if __name__ == '__main__':
 	run(host='0.0.0.0', port=8080)

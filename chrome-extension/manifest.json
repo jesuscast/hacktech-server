@@ -7,18 +7,15 @@
 	"author": "Jesus Castaneda <jesus.cast.sosa@gmail.com>",
 	"content_scripts":[
 		{
-			"matches":["http://www.netflix.com/*"],
+			"matches":["http://*/*", "https://*/*"],
 			"css":["styles.css"],
-			"js":["jquery.js","files_listener.js","website_listener.js"],
+			"js":["jquery.js","website_listener.js"],
 			"run_at":"document_end"
 		}
 	],
-	"permissions":[
-		"tabs",
-		"activeTab",
-		{"fileSystem": ["write", "retainEntries", "directory"]},
-		"http://www.netflix.com/browse"
-	],
+	"permissions": [
+	     "tabs", "http://*/*", "https://*/*"
+	  ],
 	"background": {
 		"persistent":false,
 		"scripts":["website_listener.js"]
