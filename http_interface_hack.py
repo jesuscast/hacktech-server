@@ -99,14 +99,14 @@ def add_account():
 	f.close()
 
 
-@route('/castaneda/is_website_available', method = 'POST')
+@route('/castaneda/is_website_available', method = 'GET')
 def is_website_available():
 	if request.forms.get('from')+'.json' in os.listdir(os.getcwd()+'/passwords'):
 		return 'yes'
 	else:
 		return 'no'
 
-@route('/castaneda/can_i_login', method = 'POST')
+@route('/castaneda/can_i_login', method = 'GET')
 def can_i_login():
 	if len(all_files_received) > 0:
 		most_recent = all_files_received[-1]
