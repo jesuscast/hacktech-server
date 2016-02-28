@@ -101,7 +101,7 @@ def add_account():
 
 @route('/castaneda/is_website_available', method = 'GET')
 def is_website_available():
-	if request.forms.get('from')+'.json' in os.listdir(os.getcwd()+'/passwords'):
+	if request.query['from']+'.json' in os.listdir(os.getcwd()+'/passwords'):
 		return 'yes'
 	else:
 		return 'no'
@@ -115,9 +115,9 @@ def can_i_login():
 			print 'Indeed, it has been used within the last 15 seconds.'
 			if most_recent['legit'] == True:
 				# Now it is time to check if the password is stored.
-				if request.forms.get('from')+'.json' in os.listdir(os.getcwd()+'/passwords'):
+				if request.query['from']+'.json' in os.listdir(os.getcwd()+'/passwords'):
 					print 'indeed, please send the guy the password and the username.'
-					f = open('passwords/'+request.forms.get('from')+'.json','w')
+					f = open('passwords/'+request.query['from']+'.json','w')
 					r = f.read()
 					f.close()
 					return json.loads(r)
