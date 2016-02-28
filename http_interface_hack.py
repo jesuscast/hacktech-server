@@ -58,7 +58,7 @@ def is_it_legit(file1_path, file2_path):
 	print result
 	result = int(result.replace(' ',''))
 	print 'result: '+str(result)
-	return result > 40
+	return result > 34
 
 @route('/castaneda/check_identity',  method='POST')
 def add_file_received():
