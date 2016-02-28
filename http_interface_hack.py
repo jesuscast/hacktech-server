@@ -115,7 +115,7 @@ def can_i_login():
 	if len(all_files_received) > 0:
 		most_recent = all_files_received[all_files_received.keys()[0]][-1]
 		# check that is less than 10 seconds since it was used.
-		if int(time.time()-15) > int(float(most_recent['timestamp'])):
+		if int(time.time()-60) > int(float(most_recent['timestamp'])):
 			print 'Indeed, it has been used within the last 15 seconds.'
 			if most_recent['legit'] == True:
 				# Now it is time to check if the password is stored.
