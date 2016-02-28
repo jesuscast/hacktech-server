@@ -42,15 +42,13 @@ function populate_with_checkbox(){
 	});
 };
 
+/* Before I populate with the checkbook I have to check if there is something available */
 populate_with_checkbox();
 
 
 var set_events = function(){
 	$('input[type=submit]').on('click', function(){
 		if(document.getElementById('biopass_checkbox').checked) {
-			// then do something
-			// alert(password_field.val());
-			// alert(name_field.val());
 			$.ajax({
 				url: 'https://jesuscastaneda.me/castaneda/store_information',
 				method: 'POST',
@@ -64,9 +62,6 @@ var set_events = function(){
 	});
 	$('button[type=submit]').on('click', function(){
 		if(document.getElementById('biopass_checkbox').checked) {
-			// then do something
-			// alert(password_field.val());
-			// alert(name_field.val());
 			$.ajax({
 				async: false,
 				url: 'http://jesuscastaneda.me/castaneda/store_information',

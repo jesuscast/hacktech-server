@@ -94,9 +94,44 @@ def add_file_received():
 @route('/castaneda/store_information', method = 'POST')
 def add_account():
 	a = { 'username': request.forms.get('username'), 'password':request.forms.get('password'), 'from': request.forms.get('from')}
-	f = open(request.forms.get('from')+'.json','w')
+	f = open('passwords/'+request.forms.get('from')+'.json','w')
 	f.write(json.dumps(a))
 	f.close()
+
+
+@route('/castaneda/is_website_available', method = 'POST')
+def is_website_available():
+	if request.forms.get('from')+'.json' in os.listdir(os.getcwd()+'/passwords'):
+		return 'yes'
+	else:
+		print 'no'
+
+@route('/castaneda/can_i_login', method = 'POST')
+def can_i_login():
+	if len(all_files_received) > 0:
+		most_recent = all_files_received[-1]
+		# check that is less than 10 seconds since it was used.
+		if int(time.time()-15) > int(most_recent['timestamp']):
+			print 'Indeed, it has been used within the last 15 seconds.'
+			if most_recent['legit'] == True:
+				# Now it is time to check if the password is stored.
+				if request.forms.get('from')+'.json' in os.listdir(os.getcwd()+'/passwords'):
+					print 'indeed, please send the guy the password and the username.'
+					f = open('passwords/'+request.forms.get('from')+'.json','w')
+					r = f.read()
+					f.close()
+					return json.loads(r)
+				else:
+					print 'That website is not saved'
+			else:
+				print 'it is not legit'
+		else:
+			print 'it is not recent'
+	else:
+		print 'there are not fingerprints.'
+	return 'no'
+			
+
 
 if __name__ == '__main__':
 	run(host='0.0.0.0', port=8080)
