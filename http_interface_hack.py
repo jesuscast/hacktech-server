@@ -104,7 +104,7 @@ def is_website_available():
 	if request.forms.get('from')+'.json' in os.listdir(os.getcwd()+'/passwords'):
 		return 'yes'
 	else:
-		print 'no'
+		return 'no'
 
 @route('/castaneda/can_i_login', method = 'POST')
 def can_i_login():
