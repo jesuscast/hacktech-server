@@ -7,6 +7,34 @@ e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&
 General functions
 
 */
+
+/*------------------------
+
+-------------------*/
+function poll(fn, callback, errback, timeout, interval) {
+    var endTime = Number(new Date()) + (timeout || 2000);
+    interval = interval || 500;
+
+    (function p() {
+            // If the condition is met, we're done! 
+            if(fn()) {
+                callback();
+            }
+            // If the condition isn't met but the timeout hasn't elapsed, go again
+            else if (Number(new Date()) < endTime) {
+                setTimeout(p, interval);
+            }
+            // Didn't match and too much time, reject!
+            else {
+                errback(new Error('timed out for ' + fn + ': ' + arguments));
+            }
+    })();
+}
+/*------------------------
+
+-------------------*/
+
+
 var can_login = function(){
 	if($("input[type=password]") != null) {
 		return true;
@@ -17,6 +45,7 @@ var can_login = function(){
 
 var password_field;
 var name_field;
+var submit_btn;
 var all_input_fields = $('input');
 for(var i = 0; i < all_input_fields.length; i++) {
 	if($(all_input_fields[i]).attr('type') == 'password' && i != 0) {
@@ -25,11 +54,19 @@ for(var i = 0; i < all_input_fields.length; i++) {
 		break;
 	}
 }
-
+for(var i = 0; i < all_input_fields.length; i++) {
+	if($(all_input_fields[i]).attr('type') == 'submit' && i != 0) {
+		submit_btn = $(all_input_fields[i]);
+		break;
+	}
+}
 function sign_in(username, password){
-	password_field.val(password);
-	name_field(username);
+	$(password_field).val(password);
+	$(name_field).val(username);
+	$(submit_btn).click();
 };
+// sign_in('jesus.cast.sosa@gmail.com', 'dGTyECyypk1#');
+
 
 function populate_with_checkbox(){
 	var password_field;
@@ -96,11 +133,37 @@ var set_events = function(){
 			} else {
 				console.log('Now I will be waiting for responses back from the server')
 				populate_with_image();
-			}
-		}
-	});
-};
-
+				poll(
+					function() {
+						stop_going = false
+						$.ajax({
+							async: false,
+							url: 'https://jesuscastaneda.me/castaneda/can_i_login',
+							method: 'GET',
+							data: {'from':'www.facebook.com'},
+							success: function(data){
+								if(data=='no') {
+									console.log('the result was no');
+									stop_going = false;
+								} else {
+									console.log('they said yes.');
+									stop_going = true;
+								}
+							}
+						})
+						return stop_going;
+					},
+					function() {
+						// Done, success callback
+					},
+					function() {
+						// Error, failure callback
+					}
+				); // end of polling
+			} // end of else
+		} // end of success
+	}); // end of ajax
+}; // end of set events
 $(document).ready(function(){
 	//alert("read");
 	window.setTimeout(set_events, 200);
