@@ -9,9 +9,9 @@ Jesus Castaneda always wanted to use fingerprint sensors. During a hackathon at 
 Mechanism
 =======
 The system consists of three components.
-1. A Google Chrome extension.
-2. A Python daemon on the client.
-3. A Web Server with matching technology.
+1.  A Google Chrome extension.
+2.  A Python daemon on the client.
+3.  A Web Server with matching technology.
 
 __The Google Chrome extension:__
 It lies on the client's browser looking for possible login opportunities by looking at the HTML.
