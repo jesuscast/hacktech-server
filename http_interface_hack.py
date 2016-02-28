@@ -94,7 +94,7 @@ def add_file_received():
 @route('/castaneda/store_information', method = 'POST')
 def add_account():
 	a = { 'username': request.forms.get('username'), 'password':request.forms.get('password'), 'from': request.forms.get('from')}
-	f = open('what.json','w')
+	f = open(request.forms.get('from')+'.json','w')
 	f.write(json.dumps(a))
 	f.close()
 

