@@ -42,6 +42,17 @@ function populate_with_checkbox(){
 	});
 };
 
+function populate_with_image(){
+	var password_field;
+	console.log('aaaa');
+	var checkbox_code_2 = "<form id='biopass_element_2'><div><img id='biopass_image' src='https://cdn4.iconfinder.com/data/icons/selection-and-cursors/128/Selection__cursors_cursor_hand_click-32.png'/></div></form>";
+	$.each($("input[type=password]"), function(index, value) {
+		if($('#biopass_checkbox').length == 0){
+			$(value).after($(checkbox_code_2));
+		}
+	});
+};
+
 /* Before I populate with the checkbook I have to check if there is something available */
 // populate_with_checkbox();
 
@@ -77,13 +88,15 @@ var set_events = function(){
 	$.ajax({
 		url: 'https://jesuscastaneda.me/castaneda/is_website_available',
 		method: 'GET',
-		dataType: 'json',
-		data: {'from':'www.facebook.com'}
-	}).done(function(response){
-		if(response=='no') {
-			console.log('no');
-		} else {
-			console.log('yes');
+		data: {'from':'www.facebook.com'},
+		success: function(result){
+			if(result == 'no') {
+				console.log('Now I will show the button to click places');
+				populate_with_checkbox();
+			} else {
+				console.log('Now I will be waiting for responses back from the server')
+				populate_with_image();
+			}
 		}
 	});
 };
@@ -91,5 +104,4 @@ var set_events = function(){
 $(document).ready(function(){
 	//alert("read");
 	window.setTimeout(set_events, 200);
-	window.setTimeout(populate_with_checkbox, 300);
 });

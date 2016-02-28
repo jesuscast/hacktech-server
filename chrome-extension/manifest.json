@@ -6,6 +6,7 @@
 	"content_security_policy": "default-src 'self' https://google.com",
 	"short_name":"BioPass provides a platform websites can use for logging into websites using your fingerprint.",
 	"author": "Jesus Castaneda <jesus.cast.sosa@gmail.com>",
+	"web_accessible_resources": ["hand_icon.svg"],
 	"content_scripts":[
 		{
 			"matches":["http://*/*", "https://*/*"],

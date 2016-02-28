@@ -13,3 +13,27 @@
 	top: -2px;
 	color: #333;
 }
+
+
+#biopass_element_2 {
+	width: 40px;
+    float: right;
+    background-color: #EA8B54;
+    border-radius: 5px;
+}
+
+#biopass_image {
+	z-index: 1;
+	position: relative;	
+	left: 3px;
+	top: 2px;
+}
+#biopass_checkbox_2 {
+	padding: 0px;
+	position: relative;
+	left: 12px;
+	top: 55px;
+	position: relative;
+	top: -7px;
+	left: 4px;
+}
