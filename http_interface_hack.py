@@ -99,14 +99,14 @@ def add_account():
 	f.close()
 
 
-@route('/castaneda/is_website_available', method = 'POST')
+@route('/castaneda/is_website_available', method = 'GET')
 def is_website_available():
-	if request.forms.get('from')+'.json' in os.listdir(os.getcwd()+'/passwords'):
+	if request.query['from']+'.json' in os.listdir(os.getcwd()+'/passwords'):
 		return 'yes'
 	else:
 		return 'no'
 
-@route('/castaneda/can_i_login', method = 'POST')
+@route('/castaneda/can_i_login', method = 'GET')
 def can_i_login():
 	if len(all_files_received) > 0:
 		most_recent = all_files_received[-1]
@@ -115,9 +115,9 @@ def can_i_login():
 			print 'Indeed, it has been used within the last 15 seconds.'
 			if most_recent['legit'] == True:
 				# Now it is time to check if the password is stored.
-				if request.forms.get('from')+'.json' in os.listdir(os.getcwd()+'/passwords'):
+				if request.query['from']+'.json' in os.listdir(os.getcwd()+'/passwords'):
 					print 'indeed, please send the guy the password and the username.'
-					f = open('passwords/'+request.forms.get('from')+'.json','w')
+					f = open('passwords/'+request.query['from']+'.json','w')
 					r = f.read()
 					f.close()
 					return json.loads(r)

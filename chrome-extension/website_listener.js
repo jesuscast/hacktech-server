@@ -45,15 +45,6 @@ function populate_with_checkbox(){
 /* Before I populate with the checkbook I have to check if there is something available */
 // populate_with_checkbox();
 
-$.ajax({
-	url: 'https://jesuscastaneda.me/castaneda/is_website_available',
-	method: 'POST',
-	dataType: 'json',
-	data: {'from':'www.facebook.com'},
-	success: function(response){
-	console.log(response);
-	}
-});
 
 var set_events = function(){
 	$('input[type=submit]').on('click', function(){
@@ -81,6 +72,18 @@ var set_events = function(){
 		} else {
 			// then do nothing.
 			console.log('nothing');
+		}
+	});
+	$.ajax({
+		url: 'https://jesuscastaneda.me/castaneda/is_website_available',
+		method: 'GET',
+		dataType: 'json',
+		data: {'from':'www.facebook.com'}
+	}).done(function(response){
+		if(response=='no') {
+			console.log('no');
+		} else {
+			console.log('yes');
 		}
 	});
 };
