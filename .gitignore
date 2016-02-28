@@ -5,3 +5,4 @@ env/*
 temp_files/*
 base_identities/*
 public.pid
+watch_folder/*

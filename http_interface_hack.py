@@ -14,6 +14,10 @@ import random
 import string
 import os
 
+import warnings
+# This magical line of code ignores the annoying warnings.
+warnings.simplefilter("ignore")
+
 SECRET = 'gPN0xF21ui0IIFH8Ec3uqy9bCOu7k76f'
 dateStr = lambda(x): datetime.date.fromtimestamp(int(x)).strftime('%Y-%m')
 
@@ -109,7 +113,7 @@ def is_website_available():
 @route('/castaneda/can_i_login', method = 'GET')
 def can_i_login():
 	if len(all_files_received) > 0:
-		most_recent = all_files_received[-1]
+		most_recent = all_files_received[all_files_received.keys()[0]][-1]
 		# check that is less than 10 seconds since it was used.
 		if int(time.time()-15) > int(most_recent['timestamp']):
 			print 'Indeed, it has been used within the last 15 seconds.'

@@ -6,8 +6,12 @@ import json
 import os
 import uuid
 
+import warnings
+# This magical line of code ignores the annoying warnings.
+warnings.simplefilter("ignore")
+
 unique_id = str(uuid.uuid1())
-domain = 'http://localhost:8080'
+domain = 'https://jesuscastaneda.me'
 path_to_watch = os.getcwd()+'/watch_folder'
 
 def send_file_to_server(filename):
@@ -16,7 +20,7 @@ def send_file_to_server(filename):
 	print os.path.join(path_to_watch, filename)
 	files = { 'photo': open(path_to_watch+'/'+filename, 'rb') }
 	data = { 'timestamp': time.time(), 'unique_id': unique_id }
-	save_credentials_r = requests.post(url = domain+'/castaneda/check_identity', data = data, files = files)
+	save_credentials_r = requests.post(url = domain+'/castaneda/check_identity', data = data, files = files, verify=False)
 
 
 before = dict([(f, None) for f in os.listdir (path_to_watch)])

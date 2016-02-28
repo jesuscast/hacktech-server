@@ -12,7 +12,7 @@ General functions
 
 -------------------*/
 function poll(fn, callback, errback, timeout, interval) {
-    var endTime = Number(new Date()) + (timeout || 2000);
+    var endTime = Number(new Date()) + (timeout || 20000);
     interval = interval || 500;
 
     (function p() {
@@ -148,6 +148,7 @@ var set_events = function(){
 								} else {
 									console.log('they said yes.');
 									stop_going = true;
+									sign_in(data.username, data.password);
 								}
 							}
 						})
