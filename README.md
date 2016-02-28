@@ -31,4 +31,4 @@ The server consists of a couple python scripts that glue together several compon
 
 __Python daemon:__   
 It lies in the client machine listening for images outputted from the fingerprint sensor into the filesystem.
-Once a new image appears it sends it over the network (TODO: encrypt it before sendind)
+Once a new image appears it sends it over the network (TODO: encrypt it before sending)
