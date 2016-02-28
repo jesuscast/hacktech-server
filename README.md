@@ -9,9 +9,9 @@ Jesus Castaneda always wanted to use fingerprint sensors. During a hackathon at 
 Mechanism
 =======
 The system consists of three components.
-1.  A Google Chrome extension.
-2.  A Python daemon on the client.
-3.  A Web Server with matching technology.
+1.  A Google Chrome extension.  
+2.  A Python daemon on the client.  
+3.  A Web Server with matching technology.  
 
 __The Google Chrome extension:__
 It lies on the client's browser looking for possible login opportunities by looking at the HTML.
@@ -21,11 +21,11 @@ If such a login opportunity exists it compares the current domain against a data
 
 __The Sever:__
 The server consists of a couple python scripts that glue together several components:
-1. First it listens for upcoming connections.
-2. It cleans up raw fingerprints received.
-3. Then it applies transformations to the bmp file in order to obtain the feature rich file used by the matching algorithm
-4. It feeds the processed images to a c library for matching.
-5. Keeps track of users, credentials, and domains.
+1. First it listens for upcoming connections.  
+2. It cleans up raw fingerprints received.  
+3. Then it applies transformations to the bmp file in order to obtain the feature rich file used by the matching algorithm  
+4. It feeds the processed images to a c library for matching.  
+5. Keeps track of users, credentials, and domains.  
 
 __Python daemon:__
 It lies in the client machine listening for images outputted from the fingerprint sensor into the filesystem.
